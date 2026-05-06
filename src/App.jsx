@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+ 
 const COLORS = {
   bg: "#ffffff",
   surface: "#f8fafc",
@@ -20,7 +20,7 @@ const COLORS = {
   accent7: "#6366f1",
   accent8: "#64748b",
 };
-
+ 
 const TASKS = [
   {
     id: 1,
@@ -68,20 +68,31 @@ const TASKS = [
   },
   {
     id: 5,
-    name: "Gestión de contactos digitales",
-    shortName: "Contactos digitales",
-    time: "10:00 AM – 12:00 PM",
-    duration: "2 horas",
+    name: "Gestión de contactos digitales (mañana)",
+    shortName: "Contactos AM",
+    time: "10:00 – 11:00 AM",
+    duration: "1 hora",
     color: "#ec4899",
     icon: "💬",
-    objective: "Trabajar prospectos y contactos a través de canales digitales: email, LinkedIn, WhatsApp y otras plataformas de outreach.",
-    tips: "Alterna entre prospección nueva y follow-ups. Personaliza cada mensaje según el contexto del prospecto.",
+    objective: "Primera sesión de outreach digital: email, LinkedIn, WhatsApp. Enfócate en prospección nueva y primeros contactos del día.",
+    tips: "Usa la mañana para mensajes en frío y prospección nueva. La tasa de apertura de emails es más alta antes del mediodía.",
   },
   {
     id: 6,
+    name: "Llamadas (mañana)",
+    shortName: "Llamadas AM",
+    time: "11:00 AM – 12:30 PM",
+    duration: "1.5 horas",
+    color: "#6366f1",
+    icon: "📞",
+    objective: "Primer bloque de llamadas: discovery calls, seguimiento matutino y llamadas programadas de la mañana.",
+    tips: "Las llamadas de la mañana suelen tener mayor tasa de contacto. Prioriza discovery calls y prospectos nuevos.",
+  },
+  {
+    id: 7,
     name: "Almuerzo",
     shortName: "Almuerzo",
-    time: "12:00 – 1:00 PM",
+    time: "12:30 – 1:30 PM",
     duration: "1 hora",
     color: "#f97316",
     icon: "🍽️",
@@ -89,20 +100,31 @@ const TASKS = [
     tips: "Evita revisar correos durante el almuerzo. Tu cerebro necesita este descanso para rendir en las llamadas de la tarde.",
   },
   {
-    id: 7,
-    name: "Llamadas",
-    shortName: "Llamadas",
-    time: "1:00 – 4:00 PM",
-    duration: "3 horas",
-    color: "#6366f1",
-    icon: "📞",
-    objective: "Bloque principal de llamadas: discovery calls, seguimiento, demos y negociaciones. Este es el corazón de la actividad comercial diaria.",
-    tips: "Prepara un mini-guión para cada llamada. Toma notas inmediatamente después de cada una para no perder contexto.",
+    id: 8,
+    name: "Gestión de contactos digitales (tarde)",
+    shortName: "Contactos PM",
+    time: "1:30 – 2:30 PM",
+    duration: "1 hora",
+    color: "#ec4899",
+    icon: "💬",
+    objective: "Segunda sesión de outreach digital: follow-ups, respuestas pendientes y nurturing de contactos que interactuaron en la mañana.",
+    tips: "Revisa respuestas de la mañana y haz follow-ups. La tarde es ideal para mensajes de continuación y nurturing.",
   },
   {
-    id: 8,
-    name: "Actualización de cuentas",
-    shortName: "Actualizar cuentas",
+    id: 9,
+    name: "Llamadas (tarde)",
+    shortName: "Llamadas PM",
+    time: "2:30 – 4:00 PM",
+    duration: "1.5 horas",
+    color: "#6366f1",
+    icon: "📞",
+    objective: "Segundo bloque de llamadas: demos, negociaciones y seguimiento de la tarde. Cierra pendientes del día.",
+    tips: "Usa la tarde para demos y negociaciones que requieren más tiempo. Deja las llamadas de cierre para este bloque.",
+  },
+  {
+    id: 10,
+    name: "Gestión de cuentas",
+    shortName: "Gestión cuentas",
     time: "4:00 – 6:00 PM",
     duration: "2 horas",
     color: "#10b981",
@@ -111,7 +133,7 @@ const TASKS = [
     tips: "No dejes esta tarea para mañana. La información fresca es más precisa y te ahorrará tiempo al día siguiente.",
   },
 ];
-
+ 
 const PLAYBOOK = {
   name: "Actualizar Playbook del mes",
   time: "6:00 – 7:00 PM",
@@ -123,7 +145,7 @@ const PLAYBOOK = {
   tips: "Revisa tus métricas del mes, identifica patrones y documenta los ajustes que harás el próximo mes.",
   dates: ["28 de mayo", "25 de junio", "30 de julio"],
 };
-
+ 
 const INSTALL_STEPS = [
   {
     step: 1,
@@ -162,16 +184,16 @@ const INSTALL_STEPS = [
     icon: "✅",
   },
 ];
-
+ 
 const NAV_ITEMS = [
   { id: "schedule", label: "Agenda", icon: "📅" },
   { id: "details", label: "Objetivos", icon: "🎯" },
   { id: "deals", label: "Deals 21 días", icon: "📊" },
   { id: "install", label: "Instalación", icon: "⚙️" },
 ];
-
+ 
 function TimeBlock({ task, expanded, onToggle }) {
-  const barWidth = task.duration === "15 min" ? "15%" : task.duration === "1 hora" ? "40%" : task.duration === "2 horas" ? "60%" : task.duration === "3 horas" ? "80%" : "30%";
+  const barWidth = task.duration === "15 min" ? "15%" : task.duration === "1 hora" ? "40%" : task.duration === "1.5 horas" ? "50%" : task.duration === "2 horas" ? "60%" : task.duration === "3 horas" ? "80%" : "30%";
   return (
     <div
       onClick={onToggle}
@@ -214,7 +236,7 @@ function TimeBlock({ task, expanded, onToggle }) {
           <path d="M4 7l5 5 5-5" stroke={COLORS.textSecondary} strokeWidth="1.5" fill="none" strokeLinecap="round" />
         </svg>
       </div>
-
+ 
       <div style={{
         marginTop: "10px",
         height: "4px",
@@ -230,7 +252,7 @@ function TimeBlock({ task, expanded, onToggle }) {
           transition: "width 0.4s ease",
         }} />
       </div>
-
+ 
       {expanded && (
         <div style={{
           marginTop: "14px",
@@ -260,27 +282,29 @@ function TimeBlock({ task, expanded, onToggle }) {
     </div>
   );
 }
-
+ 
 export default function QuetzalsSchedule() {
   const [activeSection, setActiveSection] = useState("schedule");
   const [expandedTask, setExpandedTask] = useState(null);
-
+ 
   const totalMinutes = 9 * 60;
   const startOfDay = 9 * 60;
-
+ 
   const calendarBlocks = [
     { name: "Revisión 20d", start: 0, dur: 15, color: "#8b5cf6" },
     { name: "Ctas. pref.", start: 15, dur: 15, color: "#06b6d4" },
     { name: "Revisión 3d", start: 30, dur: 15, color: "#f59e0b" },
     { name: "Break", start: 45, dur: 15, color: "#64748b" },
-    { name: "Contactos digitales", start: 60, dur: 120, color: "#ec4899" },
-    { name: "Almuerzo", start: 180, dur: 60, color: "#f97316" },
-    { name: "Llamadas", start: 240, dur: 180, color: "#6366f1" },
-    { name: "Actualización", start: 420, dur: 120, color: "#10b981" },
+    { name: "Contactos AM", start: 60, dur: 60, color: "#ec4899" },
+    { name: "Llamadas AM", start: 120, dur: 90, color: "#6366f1" },
+    { name: "Almuerzo", start: 210, dur: 60, color: "#f97316" },
+    { name: "Contactos PM", start: 270, dur: 60, color: "#ec4899" },
+    { name: "Llamadas PM", start: 330, dur: 90, color: "#6366f1" },
+    { name: "Gestión cuentas", start: 420, dur: 120, color: "#10b981" },
   ];
-
+ 
   const hours = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-
+ 
   return (
     <div style={{
       minHeight: "100vh",
@@ -298,7 +322,7 @@ export default function QuetzalsSchedule() {
         ::-webkit-scrollbar-track { background: ${COLORS.surface}; }
         ::-webkit-scrollbar-thumb { background: ${COLORS.border}; border-radius: 3px; }
       `}</style>
-
+ 
       {/* Header */}
       <header style={{
         padding: "20px 24px",
@@ -361,9 +385,9 @@ export default function QuetzalsSchedule() {
           ))}
         </div>
       </header>
-
+ 
       <main style={{ maxWidth: "960px", margin: "0 auto", padding: "28px 24px" }}>
-
+ 
         {/* ===== SCHEDULE SECTION ===== */}
         {activeSection === "schedule" && (
           <div style={{ animation: "slideUp 0.3s ease" }}>
@@ -375,7 +399,7 @@ export default function QuetzalsSchedule() {
                 Distribución visual de las 9 horas de jornada laboral · Lunes a Viernes
               </p>
             </div>
-
+ 
             {/* Visual Calendar */}
             <div style={{
               background: COLORS.surface,
@@ -387,7 +411,7 @@ export default function QuetzalsSchedule() {
               <div style={{ fontSize: "13px", fontWeight: 600, color: COLORS.textMuted, marginBottom: "16px", textTransform: "uppercase", letterSpacing: "0.06em" }}>
                 Línea de tiempo · 9:00 AM – 6:00 PM
               </div>
-
+ 
               {/* Hour markers */}
               <div style={{ position: "relative", marginBottom: "8px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -404,7 +428,7 @@ export default function QuetzalsSchedule() {
                   ))}
                 </div>
               </div>
-
+ 
               {/* Blocks */}
               <div style={{
                 position: "relative",
@@ -449,7 +473,7 @@ export default function QuetzalsSchedule() {
                   );
                 })}
               </div>
-
+ 
               {/* Legend */}
               <div style={{
                 display: "flex",
@@ -470,7 +494,7 @@ export default function QuetzalsSchedule() {
                 ))}
               </div>
             </div>
-
+ 
             {/* Task list */}
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               {TASKS.map((task) => (
@@ -481,7 +505,7 @@ export default function QuetzalsSchedule() {
                   onToggle={() => setExpandedTask(expandedTask === task.id ? null : task.id)}
                 />
               ))}
-
+ 
               {/* Playbook special block */}
               <div style={{
                 background: `linear-gradient(135deg, ${PLAYBOOK.color}11, ${COLORS.surface})`,
@@ -537,7 +561,7 @@ export default function QuetzalsSchedule() {
             </div>
           </div>
         )}
-
+ 
         {/* ===== DETAILS SECTION ===== */}
         {activeSection === "details" && (
           <div style={{ animation: "slideUp 0.3s ease" }}>
@@ -549,7 +573,7 @@ export default function QuetzalsSchedule() {
                 Entiende el porqué de cada tarea para aprovechar mejor tu tiempo
               </p>
             </div>
-
+ 
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {TASKS.map((task, i) => (
                 <div
@@ -570,7 +594,7 @@ export default function QuetzalsSchedule() {
                       <div style={{ fontSize: "13px", color: task.color, fontWeight: 500 }}>{task.time} · {task.duration}</div>
                     </div>
                   </div>
-
+ 
                   <div style={{ marginBottom: "14px" }}>
                     <div style={{ fontSize: "12px", fontWeight: 600, color: COLORS.textMuted, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "6px" }}>
                       Objetivo
@@ -579,7 +603,7 @@ export default function QuetzalsSchedule() {
                       {task.objective}
                     </div>
                   </div>
-
+ 
                   <div style={{
                     background: task.color + "0a",
                     border: `1px solid ${task.color}1a`,
@@ -595,7 +619,7 @@ export default function QuetzalsSchedule() {
                   </div>
                 </div>
               ))}
-
+ 
               {/* Playbook detail */}
               <div style={{
                 background: `linear-gradient(135deg, ${PLAYBOOK.color}08, ${COLORS.surface})`,
@@ -645,7 +669,7 @@ export default function QuetzalsSchedule() {
             </div>
           </div>
         )}
-
+ 
         {/* ===== DEALS SECTION ===== */}
         {activeSection === "deals" && (
           <div style={{ animation: "slideUp 0.3s ease" }}>
@@ -657,7 +681,7 @@ export default function QuetzalsSchedule() {
                 Sigue estos pasos en HubSpot para identificar deals que necesitan atención urgente
               </p>
             </div>
-
+ 
             {/* Why this matters */}
             <div style={{
               background: "#fef3c7",
@@ -679,7 +703,7 @@ export default function QuetzalsSchedule() {
                 </div>
               </div>
             </div>
-
+ 
             {/* Steps */}
             <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "28px" }}>
               {[
@@ -755,7 +779,7 @@ export default function QuetzalsSchedule() {
                     <div style={{ fontSize: "13px", color: COLORS.textSecondary, lineHeight: 1.6 }}>
                       {step.desc}
                     </div>
-
+ 
                     {step.link && (
                       <a
                         href={step.link.url}
@@ -779,7 +803,7 @@ export default function QuetzalsSchedule() {
                         🔗 {step.link.label}
                       </a>
                     )}
-
+ 
                     {step.filter && (
                       <div style={{
                         marginTop: "10px",
@@ -826,7 +850,7 @@ export default function QuetzalsSchedule() {
                 </div>
               ))}
             </div>
-
+ 
             {/* Action protocol */}
             <div style={{
               background: COLORS.surface,
@@ -840,7 +864,7 @@ export default function QuetzalsSchedule() {
               <div style={{ fontSize: "13px", color: COLORS.textSecondary, marginBottom: "18px", lineHeight: 1.6 }}>
                 Cuando identifiques un deal sin actividad por más de 21 días, sigue estos pasos en orden:
               </div>
-
+ 
               <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
                 {[
                   {
@@ -887,7 +911,7 @@ export default function QuetzalsSchedule() {
                       <div style={{ fontSize: "13px", color: COLORS.textSecondary, lineHeight: 1.6 }}>
                         {item.desc}
                       </div>
-
+ 
                       {item.participants && (
                         <div style={{
                           marginTop: "10px",
@@ -918,7 +942,7 @@ export default function QuetzalsSchedule() {
                 ))}
               </div>
             </div>
-
+ 
             {/* Example message template */}
             <div style={{
               background: COLORS.surface,
@@ -947,7 +971,7 @@ export default function QuetzalsSchedule() {
             </div>
           </div>
         )}
-
+ 
         {/* ===== INSTALL SECTION ===== */}
         {activeSection === "install" && (
           <div style={{ animation: "slideUp 0.3s ease" }}>
@@ -959,7 +983,7 @@ export default function QuetzalsSchedule() {
                 Sigue estos pasos para importar la agenda en tu Google Calendar
               </p>
             </div>
-
+ 
             {/* Info banner */}
             <div style={{
               background: COLORS.primary + "12",
@@ -981,7 +1005,7 @@ export default function QuetzalsSchedule() {
                 </div>
               </div>
             </div>
-
+ 
             {/* Steps */}
             <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "28px" }}>
               {INSTALL_STEPS.map((step, i) => (
@@ -1019,7 +1043,7 @@ export default function QuetzalsSchedule() {
                 </div>
               ))}
             </div>
-
+ 
             {/* Outlook instructions */}
             <div style={{
               background: COLORS.surface,
@@ -1035,7 +1059,7 @@ export default function QuetzalsSchedule() {
                 En Outlook de escritorio: ve a Archivo → Abrir y exportar → Importar o exportar → selecciona "Importar un archivo iCalendar (.ics)". En Outlook web: ve a Calendario → Agregar calendario → Cargar desde archivo y selecciona el archivo .ics.
               </div>
             </div>
-
+ 
             {/* Apple Calendar */}
             <div style={{
               background: COLORS.surface,
@@ -1053,7 +1077,7 @@ export default function QuetzalsSchedule() {
           </div>
         )}
       </main>
-
+ 
       {/* Footer */}
       <footer style={{
         borderTop: `1px solid ${COLORS.border}`,
@@ -1068,3 +1092,4 @@ export default function QuetzalsSchedule() {
     </div>
   );
 }
+ 
